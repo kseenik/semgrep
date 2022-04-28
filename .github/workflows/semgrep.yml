@@ -46,3 +46,10 @@ jobs:
         with:
           sarif_file: semgrep.sarif
         if: always()
+        
+      - name: Check
+        steps:
+        - uses: actions/checkout@master
+        - uses: returntocorp/semgrep-action@v1
+        with:
+          config: s/kseenik:unreliableencryption
