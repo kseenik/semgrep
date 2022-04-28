@@ -1,0 +1,18 @@
+rules:
+- id: Unreliable_Encryption
+  patterns:
+    - pattern-either:
+      - pattern: cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key(..., ..., key_size=$SIZE)
+      - pattern: cryptography.hazmat.primitives.asymmetric.dsa.generate_private_key(..., ..., key_size=$SIZE)
+  message: |
+      An unreliable encryption algorithm is used - RSA or DSA. Please use a different encryption method to avoid data leaks.
+  languages: [python]
+  severity: WARNING
+  metadata: 
+      technology:
+        - php
+      category: security
+      cwe: "CWE-327: Broken or Risky Crypto Algorithm"
+      owasp:
+        - A02:2021-Cryptographic Failures
+      
